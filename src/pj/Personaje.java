@@ -168,5 +168,9 @@ public class Personaje implements Serializable {
     public String toString() {
         return "pj.Personaje[ idPersonaje=" + idPersonaje + " ]";
     }
+
+    String get() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
     
 }
