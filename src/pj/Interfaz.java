@@ -25,8 +25,8 @@ public class Interfaz extends javax.swing.JPanel {
     }
     
     public void showData(){    
-        jTextNombre.setText(personaje.getIdPersonaje());
-        jTextFieldID.setText(personaje.getNombre());
+        jTextFieldID.setText(personaje.getIdPersonaje());
+        jTextNombre.setText(personaje.getNombre());
         jTextFieldEdad.setText(personaje.getEdad());
         jTextFieldRaza.setText(personaje.getRaza());
         jTextFieldFN.setText(String.valueOf(personaje.getFechaDeNacmiento()));
