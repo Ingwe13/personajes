@@ -24,6 +24,5 @@ public class PrecioRenderer extends DefaultTableCellRenderer {
             result = formatter.format(numberValue.doubleValue());
         }
         super.setValue(result);
-    }
-
+    }       
 }

@@ -30,7 +30,7 @@ public class ModeloTabla extends AbstractTableModel {
     @Override
     public int getColumnCount() {
         //indica las columnas
-        return 6;
+        return 7;
     }
 
     @Override
@@ -48,14 +48,17 @@ public class ModeloTabla extends AbstractTableModel {
       
             case 2:
                 return personaje.getRaza();
-                
+            
             case 3:
-                return personaje.getFechaDeNacmiento();
+                return personaje.getAlianza();
                 
             case 4:
+                return personaje.getFechaDeNacmiento();
+                
+            case 5:
                 return personaje.getFechaDeDefuncion();
        
-            case 5:
+            case 6:
                 return personaje.getDinero();
             default:
                 return null;
@@ -74,14 +77,16 @@ public class ModeloTabla extends AbstractTableModel {
    
             case 2:
                 return "Raza";
-   
             case 3:
+                return "Alianza";
+                
+            case 4:
                 return "Fecha De Nacimiento";
    
-            case 4:
+            case 5:
                 return "Fecha de defuncion";
                 
-            case 5:
+            case 6:
                 return "Dinero";
    
             default:
