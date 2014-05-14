@@ -77,6 +77,7 @@ public class ModeloTabla extends AbstractTableModel {
    
             case 2:
                 return "Raza";
+                
             case 3:
                 return "Alianza";
                 

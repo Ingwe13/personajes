@@ -14,37 +14,37 @@ import javax.swing.event.ListSelectionListener;
  */
 public class MAIN extends javax.swing.JFrame {
 
-    /**
-     * Creates new form MAIN
-     */
+    ModeloTabla modelo = new ModeloTabla();
+
     public MAIN() {
         initComponents();
         //Asignar la lista de datos a la tabla
-        ModeloTabla modelo = new ModeloTabla();  
+
         modelo.setDataList(list2);
         jTable1.setModel(modelo);
         //Solo se permite seleccionar un registro
         jTable1.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         //detectar cambio de seleccion en la tabla
-        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener(){
-
+        jTable1.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
             @Override
             public void valueChanged(ListSelectionEvent e) {
                 int indiceFilaSeleccionada = jTable1.getSelectedRow();
-                Personaje personaje = new Personaje();
-                personaje = list2.get(indiceFilaSeleccionada);
-                //este comando se usa para mostrar en el panel los datos de la tabla
-                interfaz1.setPersonaje(personaje);
-                interfaz1.showData();
+                if (indiceFilaSeleccionada != -1) {
+                    Personaje personaje = new Personaje();
+                    personaje = list2.get(indiceFilaSeleccionada);
+                    //este comando se usa para mostrar en el panel los datos de la tabla
+                    interfaz2.setPersonaje(personaje);
+                    interfaz2.showData();
+                }
             }
-            
         });
+        jTable1.getColumnModel().getColumn(3).setCellRenderer(new ImagenRenderer());
         //darle formato a las fechas
-        jTable1.getColumnModel().getColumn(3).setCellRenderer(new FechaNacRenderer());
         jTable1.getColumnModel().getColumn(4).setCellRenderer(new FechaNacRenderer());
+        jTable1.getColumnModel().getColumn(5).setCellRenderer(new FechaNacRenderer());
         //darle formato a los precios
-        jTable1.getColumnModel().getColumn(5).setCellRenderer(new PrecioRenderer());
-        
+        jTable1.getColumnModel().getColumn(6).setCellRenderer(new PrecioRenderer());
+
     }
 
     /**
@@ -61,12 +61,15 @@ public class MAIN extends javax.swing.JFrame {
         list2 = java.beans.Beans.isDesignTime() ? java.util.Collections.emptyList() : query2.getResultList();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        interfaz1 = new pj.Interfaz();
-        jDateChooser1 = new com.toedter.calendar.JDateChooser();
+        interfaz2 = new pj.Interfaz();
+        jPanel1 = new javax.swing.JPanel();
+        jButtonGuardar = new javax.swing.JButton();
+        jButtonEliminar = new javax.swing.JButton();
+        jButtonActualizar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
+        jTable1.setBackground(new java.awt.Color(255, 204, 204));
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -80,66 +83,148 @@ public class MAIN extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("jButton1");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        jButtonGuardar.setText("Guardar");
+        jButtonGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                jButtonGuardarActionPerformed(evt);
             }
         });
+
+        jButtonEliminar.setText("Eliminar");
+        jButtonEliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonEliminarActionPerformed(evt);
+            }
+        });
+
+        jButtonActualizar.setText("Actualizar");
+        jButtonActualizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonActualizarActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonGuardar)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButtonEliminar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(54, 54, 54)
+                        .addComponent(jButtonActualizar)))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonGuardar)
+                    .addComponent(jButtonEliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonActualizar)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(interfaz1, javax.swing.GroupLayout.PREFERRED_SIZE, 329, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(105, 105, 105)
-                                .addComponent(jButton1))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(55, 55, 55)
-                                .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(48, 48, 48)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(215, 215, 215))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(interfaz1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                        .addGap(120, 120, 120)
-                        .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(139, 139, 139)
-                        .addComponent(jButton1)))
-                .addContainerGap())
+                        .addGap(121, 121, 121)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(153, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       Personaje personaje = new Personaje();
+    private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
+         
 
+        //llamar AgregarPJ
+        //nombre del objeto en este caso es el nombre del panel al ser arrastrado
+        //al MAIN luego añades el metodo
+        interfaz2.AgregarPJ();
+
+        entityManager2.getTransaction().begin();
+        //Almacenar el objeto en la BD 
+        entityManager2.persist(interfaz2.getPersonaje());
+        entityManager2.getTransaction().commit();
+
+        //Añadir el objeto al final de la lista de datos 
+        list2.add(interfaz2.getPersonaje());
+        //Informar al JTable que se ha insertado una fila al final 
+        modelo.fireTableRowsInserted(list2.size() - 1, list2.size() - 1);
+    }//GEN-LAST:event_jButtonGuardarActionPerformed
+
+    private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
+
+        //Obtener el índice de la fila seleccionada en la tabla 
+        int selectedRow = jTable1.getSelectedRow();
+        //Obtener el objeto desde la lista de datos, conociendo su posición 
+        Personaje Personaje = list2.get(selectedRow);
+
+        //Iniciar una transacción con la BD 
+        entityManager2.getTransaction().begin();
+        //Eliminar el objeto 
+        entityManager2.remove(Personaje);
+        //Finalizar la transacción actualizando la BD 
+        entityManager2.getTransaction().commit();
+
+        //Eliminar el objeto de la lista de datos 
+        list2.remove(Personaje);
+        //Informar al JTable que se ha eliminado una fila 
+        modelo.fireTableRowsDeleted(selectedRow, selectedRow);
+    }//GEN-LAST:event_jButtonEliminarActionPerformed
+
+    private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
        
-//       for(int i=0; i<list1.si)
-       
-        System.out.println(" ");
+        interfaz2.ActualizarPJ();
         
-       
-    }//GEN-LAST:event_jButton1ActionPerformed
+        //Obtener el índice de la fila seleccionada en la tabla 
+        int selectedRow = jTable1.getSelectedRow();
+        //Obtener el objeto desde la lista de datos, conociendo su posición 
+        Personaje personaje = list2.get(selectedRow);
 
-    
+        entityManager2.getTransaction().begin();
+        //Actualizar el objeto en la BD 
+        //merge guarda en la base de datos lo que le indiques
+        entityManager2.merge(personaje);
+        entityManager2.getTransaction().commit();
+
+        //Añadir el objeto al final de la lista de datos 
+        list2.set(selectedRow, personaje);
+        //Informar al JTable que se ha modificado la fila seleccionada 
+        modelo.fireTableRowsUpdated(selectedRow, selectedRow);
+    }//GEN-LAST:event_jButtonActualizarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -176,9 +261,11 @@ public class MAIN extends javax.swing.JFrame {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.persistence.EntityManager entityManager2;
-    private pj.Interfaz interfaz1;
-    private javax.swing.JButton jButton1;
-    private com.toedter.calendar.JDateChooser jDateChooser1;
+    private pj.Interfaz interfaz2;
+    private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonEliminar;
+    private javax.swing.JButton jButtonGuardar;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private java.util.List<Personaje> list2;
