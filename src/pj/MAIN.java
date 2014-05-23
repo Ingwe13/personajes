@@ -4,6 +4,7 @@
  */
 package pj;
 
+import javax.swing.JOptionPane;
 import javax.swing.ListSelectionModel;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -66,6 +67,7 @@ public class MAIN extends javax.swing.JFrame {
         jButtonGuardar = new javax.swing.JButton();
         jButtonEliminar = new javax.swing.JButton();
         jButtonActualizar = new javax.swing.JButton();
+        jButtonBuscar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -104,6 +106,13 @@ public class MAIN extends javax.swing.JFrame {
             }
         });
 
+        jButtonBuscar.setText("Buscar");
+        jButtonBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonBuscarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -111,14 +120,17 @@ public class MAIN extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonGuardar)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButtonEliminar))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(54, 54, 54)
-                        .addComponent(jButtonActualizar)))
-                .addContainerGap(19, Short.MAX_VALUE))
+                        .addComponent(jButtonActualizar))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButtonBuscar)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jButtonGuardar)
+                                .addGap(18, 18, 18)
+                                .addComponent(jButtonEliminar)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -129,23 +141,25 @@ public class MAIN extends javax.swing.JFrame {
                     .addComponent(jButtonEliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButtonActualizar)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButtonBuscar)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(10, 10, 10)
-                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(48, 48, 48)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 618, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(215, 215, 215))
+                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, 316, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(26, 26, 26)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -154,25 +168,27 @@ public class MAIN extends javax.swing.JFrame {
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(121, 121, 121)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
                         .addGap(27, 27, 27)
-                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(153, Short.MAX_VALUE))
+                        .addComponent(interfaz2, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(138, 138, 138)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(26, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButtonGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGuardarActionPerformed
-         
-
+       //coger el texto
+        
         //llamar AgregarPJ
         //nombre del objeto en este caso es el nombre del panel al ser arrastrado
         //al MAIN luego añades el metodo
         interfaz2.AgregarPJ();
-
+  
+        interfaz2.getPersonaje().getNombre().isEmpty();
+        
         entityManager2.getTransaction().begin();
         //Almacenar el objeto en la BD 
         entityManager2.persist(interfaz2.getPersonaje());
@@ -182,34 +198,44 @@ public class MAIN extends javax.swing.JFrame {
         list2.add(interfaz2.getPersonaje());
         //Informar al JTable que se ha insertado una fila al final 
         modelo.fireTableRowsInserted(list2.size() - 1, list2.size() - 1);
+        
+        
     }//GEN-LAST:event_jButtonGuardarActionPerformed
 
     private void jButtonEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonEliminarActionPerformed
-
-        //Obtener el índice de la fila seleccionada en la tabla 
         int selectedRow = jTable1.getSelectedRow();
-        //Obtener el objeto desde la lista de datos, conociendo su posición 
-        Personaje Personaje = list2.get(selectedRow);
+        if(selectedRow != -1){
+            //Obtener el índice de la fila seleccionada en la tabla 
 
-        //Iniciar una transacción con la BD 
-        entityManager2.getTransaction().begin();
-        //Eliminar el objeto 
-        entityManager2.remove(Personaje);
-        //Finalizar la transacción actualizando la BD 
-        entityManager2.getTransaction().commit();
+            //Obtener el objeto desde la lista de datos, conociendo su posición 
+            Personaje Personaje = list2.get(selectedRow);
+            
+            //Iniciar una transacción con la BD 
+            entityManager2.getTransaction().begin();
+            //Eliminar el objeto 
+            entityManager2.remove(Personaje);
+            //Finalizar la transacción actualizando la BD 
+            entityManager2.getTransaction().commit();
 
-        //Eliminar el objeto de la lista de datos 
-        list2.remove(Personaje);
-        //Informar al JTable que se ha eliminado una fila 
-        modelo.fireTableRowsDeleted(selectedRow, selectedRow);
+            //Eliminar el objeto de la lista de datos 
+            list2.remove(Personaje);
+            //Informar al JTable que se ha eliminado una fila 
+            modelo.fireTableRowsDeleted(selectedRow, selectedRow);
+        }else{
+            //esto te muestra una pantalla indicando el error 
+            JOptionPane.showMessageDialog(this, "Debes clickar un personaje");
+        }
+        
     }//GEN-LAST:event_jButtonEliminarActionPerformed
-
+    
     private void jButtonActualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonActualizarActionPerformed
        
-        interfaz2.ActualizarPJ();
         
+       
         //Obtener el índice de la fila seleccionada en la tabla 
         int selectedRow = jTable1.getSelectedRow();
+         if(selectedRow != -1){
+             interfaz2.ActualizarPJ();
         //Obtener el objeto desde la lista de datos, conociendo su posición 
         Personaje personaje = list2.get(selectedRow);
 
@@ -223,7 +249,14 @@ public class MAIN extends javax.swing.JFrame {
         list2.set(selectedRow, personaje);
         //Informar al JTable que se ha modificado la fila seleccionada 
         modelo.fireTableRowsUpdated(selectedRow, selectedRow);
+        }else{
+            JOptionPane.showMessageDialog(this, "Debes clickar un personaje");
+        }
     }//GEN-LAST:event_jButtonActualizarActionPerformed
+
+    private void jButtonBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonBuscarActionPerformed
+      // Personaje personaje = entityManager2(Personaje.class, interfaz2 );
+    }//GEN-LAST:event_jButtonBuscarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -263,6 +296,7 @@ public class MAIN extends javax.swing.JFrame {
     private javax.persistence.EntityManager entityManager2;
     private pj.Interfaz interfaz2;
     private javax.swing.JButton jButtonActualizar;
+    private javax.swing.JButton jButtonBuscar;
     private javax.swing.JButton jButtonEliminar;
     private javax.swing.JButton jButtonGuardar;
     private javax.swing.JPanel jPanel1;
